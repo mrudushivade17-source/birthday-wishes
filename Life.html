@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday My Love</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: radial-gradient(circle at top, #ffdde8, #ffe9f2, #ffd1dc, #17001f);
+    }
+    .font-love { font-family: 'Pacifico', cursive; }
+
+    .heart {
+      position: fixed;
+      bottom: -40px;
+      color: rgba(255, 70, 130, 0.8);
+      animation: floatHeart linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+      15% { opacity: 1; }
+      100% { transform: translateY(-115vh) rotate(360deg) scale(1.8); opacity: 0; }
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 15px white;
+      animation: sparkle 2s infinite ease-in-out;
+      z-index: 2;
+      pointer-events: none;
+    }
+    @keyframes sparkle {
+      0%, 100% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+
+    .step {
+      display: none;
+      animation: popIn .8s ease forwards;
+    }
+    .step.active { display: block; }
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(35px) scale(.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 25px 60px rgba(121, 0, 65, 0.28);
+    }
+
+    .gift-box {
+      width: 150px;
+      height: 115px;
+      background: linear-gradient(135deg, #ff3f8f, #ff8fb8);
+      border-radius: 18px;
+      position: relative;
+      margin: 0 auto;
+      animation: bounceGift 1.5s infinite;
+      cursor: pointer;
+      box-shadow: 0 20px 45px rgba(255, 45, 130, .45);
+    }
+    .gift-box::before {
+      content: '';
+      position: absolute;
+      width: 28px;
+      height: 115px;
+      background: #fff4b8;
+      left: 61px;
+      top: 0;
+    }
+    .gift-box::after {
+      content: '';
+      position: absolute;
+      width: 170px;
+      height: 28px;
+      background: #fff4b8;
+      left: -10px;
+      top: 42px;
+    }
+    .gift-lid {
+      width: 175px;
+      height: 38px;
+      background: linear-gradient(135deg, #ff1f7a, #ff72aa);
+      border-radius: 16px;
+      position: absolute;
+      top: -35px;
+      left: -12px;
+      transition: .5s ease;
+    }
+    .gift-box.open .gift-lid {
+      transform: rotate(-25deg) translate(-35px, -45px);
+    }
+    @keyframes bounceGift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .balloon {
+      position: absolute;
+      width: 60px;
+      height: 78px;
+      border-radius: 50% 50% 45% 45%;
+      animation: balloonFloat 4s ease-in-out infinite;
+      z-index: 0;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 90px;
+      background: rgba(255,255,255,.6);
+      left: 50%;
+      top: 76px;
+    }
+    @keyframes balloonFloat {
+      0%,100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-28px) rotate(4deg); }
+    }
+
+    .typing {
+      border-right: 3px solid #ff2e83;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3.5s steps(40), blink .7s infinite;
+    }
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    .cake {
+      position: relative;
+      width: 210px;
+      height: 135px;
+      margin: 0 auto;
+    }
+    .cake-base {
+      position: absolute;
+      bottom: 0;
+      width: 210px;
+      height: 85px;
+      background: linear-gradient(180deg, #ff78ad, #ff2f86);
+      border-radius: 18px 18px 28px 28px;
+      box-shadow: 0 18px 35px rgba(255, 47, 134, .38);
+    }
+    .cake-top {
+      position: absolute;
+      bottom: 70px;
+      width: 210px;
+      height: 40px;
+      background: #fff7fb;
+      border-radius: 50%;
+    }
+    .candle {
+      position: absolute;
+      bottom: 105px;
+      left: 96px;
+      width: 18px;
+      height: 45px;
+      background: repeating-linear-gradient(45deg, #fff, #fff 6px, #ff4d94 6px, #ff4d94 12px);
+      border-radius: 8px;
+    }
+    .flame {
+      position: absolute;
+      bottom: 146px;
+      left: 95px;
+      width: 20px;
+      height: 30px;
+      background: radial-gradient(circle, #fff7a1 20%, #ffb300 60%, #ff4d00 100%);
+      border-radius: 50% 50% 50% 50%;
+      animation: flame .25s infinite alternate;
+      transform-origin: bottom;
+    }
+    @keyframes flame {
+      from { transform: scale(1) rotate(-3deg); }
+      to { transform: scale(1.15) rotate(3deg); }
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 10px;
+      height: 16px;
+      animation: confettiFall 3s linear forwards;
+      z-index: 40;
+    }
+    @keyframes confettiFall {
+      to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    .shake { animation: shake .45s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    margin:40px auto;
+    max-width:1250px;
+}
+
+.gallery img{
+    width:180px;
+    height:230px;
+    object-fit:cover;
+    display:block;
+    flex:0 0 auto;
+    border-radius:20px;
+    border:5px solid #fff;
+    box-shadow:0 10px 25px rgba(255,20,147,.35);
+}
+.lightbox{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.9);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    cursor:pointer;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+}
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 text-black relative">
+  <div class="balloon bg-pink-400 left-8 top-20"></div>
+  <div class="balloon bg-purple-400 right-10 top-28" style="animation-delay:1s"></div>
+  <div class="balloon bg-yellow-300 left-1/4 bottom-16" style="animation-delay:2s"></div>
+  <div class="balloon bg-red-400 right-1/4 bottom-20" style="animation-delay:.5s"></div>
+
+<main class="relative z-10 w-full max-w-screen-xl mx-auto flex justify-center">
+<div class="glass rounded-[2rem] p-6 sm:p-10 text-center w-full max-w-screen-xl mx-auto">
+      <section class="step active w-full" data-step="0">
+        <p class="uppercase tracking-[.35em] text-sm text-black mb-4">A tiny surprise for you</p>
+        <h1 class="font-love text-5xl sm:text-7xl text-black drop-shadow-lg mb-6">Hey Beautiful</h1>
+        <p class="text-lg sm:text-xl text-black/90 max-w-xl mx-auto mb-8">Today is not just another day. It is the day my favorite person came into this world.</p>
+        <button onclick="nextStep()" class="bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition">Open Your Surprise 💝</button>
+      </section>
+
+      <section class="step w-full" data-step="1">
+        <h2 class="font-love text-4xl sm:text-6xl mb-5">First, catch my heart</h2>
+        <p class="mb-6 text-black/90">Click the floating heart 5 times to unlock your birthday wish.</p>
+        <div class="relative h-72 rounded-3xl bg-white/15 overflow-hidden border border-white/20" id="heartGame">
+          <button id="catchHeart" class="absolute text-5xl hover:scale-125 transition">💖</button>
+          <div class="absolute left-4 top-4 bg-white/25 px-4 py-2 rounded-full">Caught: <span id="score">0</span>/5</div>
+        </div>
+      </section>
+
+      <section class="step w-full" data-step="2">
+        <h2 class="font-love text-4xl sm:text-6xl mb-7 text-transform: uppercase;"> A Gift For You</h2>
+        <p class="mb-10 text-black/90 ">Tap the gift box gently.</p>
+        <div class="gift-box" onclick="openGift(this)">
+          <div class="gift-lid"></div>
+        </div>
+        <p id="giftMessage" class="hidden mt-10 text-2xl font-semibold text-black">Inside this gift is my love, my prayers, and my forever smile for you. 🥺❤️</p>
+      </section>
+
+      <section class="step w-full" data-step="3">
+        
+        <div class="cake mb-8">
+          <div class="flame" id="flame"></div>
+          <div class="candle"></div>
+          <div class="cake-top"></div>
+          <div class="cake-base"></div>
+        </div>
+        <p class="mb-6 text-black/90">Click the candle flame to blow it out.</p>
+        <button onclick="blowCandle()" class="bg-pink-600 hover:bg-pink-700 text-black px-8 py-4 rounded-full font-bold shadow-xl transition">Blow Candle 🕯️</button>
+      </section>
+
+      <section class="step w-full" data-step="4">
+        <p class="uppercase tracking-[.35em] text-sm text-pink-100 mb-4">Final Message</p>
+        <h2 class="font-love text-3xl sm:text-5xl mb-4"> Happy Birthday My Love 🎂</h2>    
+        <div class="max-w-2xl mx-auto text-left bg-white/20 rounded-3xl p-4 sm:p-5 border border-white/25">        
+        <p class="text-sm sm:text-base leading-6 text-black/95 break-words">
+            माझ्या प्रिय पतीसाठी ❤️🌹
+</p>
+<p class="text-sm sm:text-base leading-6 text-black/95 break-words mt-3">
+माझ्या आयुष्याच्या सर्वात खास व्यक्तीला, 
+</p>
+<p class="text-sm sm:text-base leading-6 text-black/95 break-words mt-3">
+💖 आज या पत्रातून मी तुला माझ्या मनातले काही शब्द सांगू इच्छिते ✨. शब्द अपुरे पडतील कदाचित, पण माझं प्रेम नेहमीच खरं आणि खूप खोल आहे ❤️.
+तू फक्त माझा पती नाहीस, तर माझा आधार 🤝, माझा सर्वोत्तम मित्र 👩‍❤️‍👨 आणि माझ्या आयुष्याचा सर्वात सुंदर भाग आहेस 🌸. तुझ्यासोबत प्रत्येक दिवस खास वाटतो 🌞, आणि प्रत्येक क्षण अर्थपूर्ण आणि आनंददायी होतो 💫.
+माझं तुझ्यावरचं प्रेम हे शब्दांपेक्षा खूप मोठं आहे ❤️‍🔥. तू माझ्या आयुष्याला पूर्णत्व दिलंस 🥰. तुझ्याशिवाय माझं जग अपूर्ण आणि रिकामं वाटतं 🌍💔.मी तुझ्यासोबत प्रत्येक सुख-दुःखात 😊😢, प्रत्येक परिस्थितीत कायम उभी आहे 💪. 
+       </p>
+       <p class="text-sm sm:text-base leading-6 text-black/95 break-words mt-3">
+माझं हृदय, माझं प्रेम आणि माझं आयुष्य फक्त तुझ्यासाठीच आहे 💖 आणि कायम राहील. तू माझ्या आयुष्याचा राजा आहेस 👑, आणि माझ्या जगाचा केंद्रबिंदू 🌎. तुझ्या उपस्थितीने माझं आयुष्य एक सुंदर राजवाडा बनलं आहे 🏰✨, जिथे प्रेम, आनंद आणि शांतता भरलेली आहे. तुझं प्रेमळ, समजूतदार आणि दयाळू मन मला रोज प्रेरणा देतं 🌷. तू जसा आहेस, तसाच तू माझ्यासाठी परिपूर्ण आहेस 💕, आणि मी तुझ्यावर नेहमीच अभिमान करते.मी देवाकडे नेहमी प्रार्थना करते 🙏 की तुला दीर्घायुष्य, उत्तम आरोग्य आणि अपार आनंद लाभो 🌟. आपलं नातं असंच प्रेम, विश्वास आणि साथ याने अधिक मजबूत होत जावो 🤍. आपण दोघं असेच हातात हात घेऊन आयुष्यभर पुढे जाऊ 🤍👫.
+</p>
+<p class="text-sm sm:text-base leading-6 text-black/95 break-words mt-3">
+तुझीच कायमची ❤️ 
+तुझी पत्नी 💌
+          </p>
+</div>
+<button
+onclick="showStep(5)"
+class="mt-8 bg-pink-600 text-white px-8 py-4 rounded-full font-bold">
+See Our Memories ❤️
+</button>
+</section>
+<section class="step w-full" data-step="5">
+
+<h2 class="font-love text-5xl text-center text-pink-700 mb-10">
+    ❤️ Our Beautiful Memories ❤️
+</h2>
+
+<div id="gallery" class="gallery">
+
+    <img src="images/image1.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image2.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image3.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image4.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image5.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image6.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image7.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image8.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image9.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image10.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image11.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image12.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image13.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image14.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image15.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image16.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image17.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image18.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image19.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image20.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image21.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image22.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image23.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image24.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image25.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image26.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image27.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image28.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image29.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image30.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image31.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image32.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image33.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image34.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image35.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image36.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image37.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image38.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image39.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image40.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image41.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image42.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image43.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image44.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image45.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image46.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image47.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image48.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image49.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image50.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image51.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image52.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image53.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image54.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image55.jpg" onclick="openLightbox(this.src)">
+    <img src="images/image56.jpg" onclick="openLightbox(this.src)">
+</div> <!-- Close Gallery -->
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg">
+</div>
+
+<!-- Replay Button -->
+<div class="text-center mt-10 mb-12">
+    <button id="replayBtn"
+        onclick="restartWish()"
+        class="bg-pink-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition">
+        🔁 Replay Magic ✨
+    </button>
+</div>
+</section>
+</div>
+  </main>
+
+  <script>
+let bgMusic;
+
+window.onload = function(){
+
+    bgMusic = document.getElementById("bgMusic");
+
+    createFloatingHearts();
+    createSparkles();
+
+}
+    let currentStep = 0;
+    let score = 0;
+    const steps = document.querySelectorAll('.step');
+    const catchHeart = document.getElementById('catchHeart');
+    const heartGame = document.getElementById('heartGame');
+    const scoreEl = document.getElementById('score');
+
+    function showStep(index) {
+      steps.forEach(step => step.classList.remove('active'));
+      steps[index].classList.add('active');
+      currentStep = index;
+      if (index === 1) moveHeart();
+      if (index === 4) launchConfetti();
+    }
+
+   function nextStep() {
+
+    if(currentStep===0){
+
+        bgMusic.currentTime=0;
+
+        bgMusic.play()
+        .then(()=>{
+            console.log("Music Started");
+        })
+        .catch(err=>{
+            console.log(err);
+            alert(err);
+        });
+
+    }
+
+    showStep(currentStep+1);
+
+}
+
+    function createFloatingHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = ['💞','❤️','💓','❤️‍🩹','🦋','💖','💋','💕','😍','💗','🧿','💘'][Math.floor(Math.random() * 12)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (18 + Math.random() * 28) + 'px';
+        heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+      }, 350);
+    }
+
+    function createSparkles() {
+      for (let i = 0; i < 35; i++) {
+        const sp = document.createElement('div');
+        sp.className = 'sparkle';
+        sp.style.left = Math.random() * 100 + 'vw';
+        sp.style.top = Math.random() * 100 + 'vh';
+        sp.style.animationDelay = Math.random() * 3 + 's';
+        document.body.appendChild(sp);
+      }
+    }
+
+    function moveHeart() {
+      const maxX = heartGame.clientWidth - 70;
+      const maxY = heartGame.clientHeight - 70;
+      catchHeart.style.left = Math.random() * maxX + 'px';
+      catchHeart.style.top = Math.random() * maxY + 'px';
+    }
+
+    catchHeart.addEventListener('click', () => {
+      score++;
+      scoreEl.textContent = score;
+      catchHeart.classList.add('shake');
+      setTimeout(() => catchHeart.classList.remove('shake'), 450);
+      if (score >= 5) {
+        setTimeout(() => showStep(2), 500);
+      } else {
+        moveHeart();
+      }
+    });
+
+    function openGift(box) {
+      box.classList.add('open');
+      document.getElementById('giftMessage').classList.remove('hidden');
+      launchConfetti(50);
+      setTimeout(() => showStep(3), 2500);
+    }
+
+    function blowCandle() {
+      document.getElementById('flame').style.display = 'none';
+      launchConfetti(120);
+      setTimeout(() => showStep(4), 1200);
+    }
+
+    function launchConfetti(amount = 100) {
+      const colors = ['#ff4d94', '#fff176', '#7c4dff', '#00e5ff', '#ffffff', '#ff1744'];
+      for (let i = 0; i < amount; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        c.style.animationDelay = Math.random() * 1.2 + 's';
+        c.style.animationDuration = (2 + Math.random() * 2.5) + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4500);
+      }
+    }
+
+    function restartWish() {
+
+    score = 0;
+    scoreEl.textContent = "0";
+
+    document.getElementById("flame").style.display = "block";
+    document.getElementById("giftMessage").classList.add("hidden");
+    document.querySelector(".gift-box").classList.remove("open");
+
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+
+    showStep(0);
+   }
+   function openLightbox(src){
+
+    document.getElementById("lightbox").style.display="flex";
+    document.getElementById("lightboxImg").src=src;
+
+}
+
+function closeLightbox(){
+
+    document.getElementById("lightbox").style.display="none";
+
+}
+  </script>
+<audio id="bgMusic" loop preload="auto">
+    <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
